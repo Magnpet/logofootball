@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Football Logo Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="tab" id="aboutTab">About</div>
+        <h1>Football Logo Game</h1>
+        <div class="tab" id="changeModeTab">
+            Change Gamemode
+            <div class="dropdown-content" id="gameModeDropdown">
+                <div class="dropdown-item selected" data-mode="classic">Logo Game</div>
+                <div class="dropdown-item" data-mode="duel">Logo Duel</div>
+                <div class="dropdown-item" data-mode="reveal">Logo Reveal</div>
+                <div class="dropdown-item" data-mode="puzzle">Logo Puzzle Guesser</div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="main-wrapper">
+        <div class="container game-container">
+            <div class="categories">
+                <div class="category-column">
+                    <!-- Left-side categories -->
+                    <div class="category" id="trophiesBox">
+                        <h2>Trophies</h2>
+                        <div class="category-box"></div>
+                        <div class="rank" id="trophiesRank"></div>
+                    </div>
+                    <div class="category" id="squadAgeBox">
+                        <h2>Average Squad Age</h2>
+                        <div class="category-box"></div>
+                        <div class="rank" id="squadAgeRank"></div>
+                    </div>
+                    <div class="category" id="marketValueBox">
+                        <h2>Club Market Value</h2>
+                        <div class="category-box"></div>
+                        <div class="rank" id="marketValueRank"></div>
+                    </div>
+                    <div class="category" id="stadiumCapacityBox">
+                        <h2>Stadium Capacity</h2>
+                        <div class="category-box"></div>
+                        <div class="rank" id="stadiumCapacityRank"></div>
+                    </div>
+                </div>
+
+                <div class="flag-column">
+                    <div class="flag-container">
+                        <div class="country-name" id="countryName"></div>
+                        <div class="flag-box" id="flagBox"></div>
+                        <button onclick="rollFlag()">Roll</button>
+                        <div id="pickText">Pick!</div>
+                        <div id="averageRankingText" style="margin-top: 50px; text-align: center;"></div>
+                        <div class="how-to-play-container">
+                            <button id="howToPlayButton" class="how-to-play-button">How to Play</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="howToPlayModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h2>How to Play</h2>
+                        <div class="instructions">
+                            <p>1. Click the "Roll" button to get a random football team logo.</p>
+                            <p>2. Place the logo in one of the eight category boxes to see how that team ranks in that category.</p>
+                            <p>3. Rankings go from 1st (best) to 50th (worst).</p>
+                            <p>4. You have 3 skips - if you don't like a team, you can click "Re-roll" to get a different one.</p>
+                            <p>5. After filling all eight categories, you'll see your average ranking.</p>
+                            <p>6. The goal is to achieve the lowest possible average ranking.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-column">
+                    <!-- Right-side categories -->
+                    <div class="category" id="homegrownBox">
+                        <h2>Homegrown Players</h2>
+                        <div class="category-box"></div>
+                        <div class="rank" id="homegrownRank"></div>
+                    </div>
+                    <div class="category" id="foreignPlayersBox">
+                        <h2>Foreign Players</h2>
+                        <div class="category-box"></div>
+                        <div class="rank" id="foreignPlayersRank"></div>
+                    </div>
+                    <div class="category" id="clubAgeBox">
+                        <h2>Age of Club</h2>
+                        <div class="category-box"></div>
+                        <div class="rank" id="clubAgeRank"></div>
+                    </div>
+                    <div class="category" id="topFlightYearsBox">
+                        <h2>Years in Top Flight</h2>
+                        <div class="category-box"></div>
+                        <div class="rank" id="topFlightYearsRank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="flagDuelContainer" class="game-container" style="display: none;">
+            <div class="duel-content">
+                <h2>Logo Duel</h2>
+                
+                <!-- Category display -->
+                <div class="duel-category" id="duelCategory">Category: <span id="categoryName">Trophies</span></div>
+                
+                <!-- Flags section -->
+                <div class="duel-flags">
+                    <div class="duel-flag-container">
+                        <div class="duel-flag" id="leftFlag"></div>
+                        <div class="duel-country-name" id="leftCountryName">Team 1</div>
+                    </div>
+                    <div class="vs-container">VS</div>
+                    <div class="duel-flag-container">
+                        <div class="duel-flag" id="rightFlag"></div>
+                        <div class="duel-country-name" id="rightCountryName">Team 2</div>
+                    </div>
+                </div>
+                
+                <!-- Instruction text -->
+                <div class="duel-instruction">Click on the logo of the team that ranks higher!</div>
+                
+                <!-- Score display -->
+                <div class="duel-score-container">
+                    <div class="duel-scores-row">
+                        <div class="duel-high-score" id="duelHighScore">High Score: 0</div>
+                        <div class="duel-score" id="duelScore">Score: 0</div>
+                    </div>
+                    <div class="duel-high-score-message-container">
+                        <!-- High score message will be added here by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Next button -->
+                <button id="nextDuelButton" style="display: none;">Next Duel</button>
+            </div>
+        </div>
+        <div id="flagRevealContainer" class="game-container" style="display: none;">
+            <div class="reveal-content">
+                <h2>Logo Reveal</h2>
+                
+                <div class="reveal-game-area">
+                    <!-- Flag display with puzzle pieces -->
+                    <div class="reveal-flag-container">
+                        <div class="reveal-flag" id="revealFlag"></div>
+                        <div class="reveal-puzzle-grid" id="puzzleGrid"></div>
+                    </div>
+                    
+                    <!-- Timer and progress -->
+                    <div class="reveal-info">
+                        <div class="reveal-progress">Pieces Revealed: <span id="revealProgress">0</span>/16</div>
+                        <div class="reveal-score">Score: <span id="revealScore">0</span></div>
+                        <div class="reveal-high-score">High Score: <span id="revealHighScore">0</span></div>
+                        <div class="reveal-lives">Attempts Left: <span id="revealLives">3</span></div>
+                    </div>
+                    
+                    <!-- Input form -->
+                    <div class="reveal-input-container">
+                        <input type="text" id="countryGuessInput" placeholder="Type team name...">
+                        <button id="submitGuessButton">Submit</button>
+                    </div>
+                    
+                    <!-- Message display -->
+                    <div class="reveal-message" id="revealMessage"></div>
+                    
+                    <!-- Next round button -->
+                    <button id="nextRevealButton" style="display: none;">Next Logo</button>
+                </div>
+            </div>
+        </div>
+        <div id="flagPuzzleContainer" class="game-container" style="display: none;">
+            <div class="puzzle-content">
+                <h2>Logo Puzzle Guesser</h2>
+                
+                <div class="puzzle-game-area">
+                    <!-- Timer and Score Display -->
+                    <div class="puzzle-info">
+                        <div class="puzzle-timer">Time: <span id="puzzleTimer">2:00</span></div>
+                        <div class="puzzle-score">Score: <span id="puzzleScore">0</span></div>
+                        <div class="puzzle-high-score">High Score: <span id="puzzleHighScore">0</span></div>
+                    </div>
+                    
+                    <!-- Merged Flag Display -->
+                    <div class="puzzle-flag-container">
+                        <div class="puzzle-merged-flag" id="puzzleMergedFlag"></div>
+                        <div class="puzzle-progress">
+                            Logos Identified: <span id="flagsIdentified">0</span>/<span id="totalFlags">2</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Input form -->
+                    <div class="puzzle-input-container">
+                        <input type="text" id="countryPuzzleInput" placeholder="Type team name...">
+                        <button id="submitPuzzleButton">Submit</button>
+                    </div>
+                    
+                    <!-- Skip button (in its own container) -->
+                    <div class="puzzle-skip-container">
+                        <button id="skipPuzzleButton">Skip This Puzzle</button>
+                    </div>
+                    
+                    <!-- Guessed Teams List -->
+                    <div class="puzzle-guessed-flags" id="guessedFlags"></div>
+                    
+                    <!-- Message display -->
+                    <div class="puzzle-message" id="puzzleMessage"></div>
+                    
+                    <!-- Game Controls -->
+                    <button id="startPuzzleButton">Start Game</button>
+                    <button id="restartPuzzleButton" style="display: none;">Play Again</button>
+                </div>
+            </div>
+        </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
