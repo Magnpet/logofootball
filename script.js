@@ -834,7 +834,7 @@ const teamLogos = [
     // Bundesliga Teams
     { name: "FC Augsburg", path: "logos/Bundesliga/augsburg.png" },
     { name: "Bayern Munich", path: "logos/Bundesliga/bayern.png" },
-    { name: "Vfl Bochum", path: "logos/Bundesliga/bochum.png" },
+    { name: "VfL Bochum", path: "logos/Bundesliga/bochum.png" },
     { name: "Werder Bremen", path: "logos/Bundesliga/bremen.png" },
     { name: "Borussia Dortmund", path: "logos/Bundesliga/dortmund.png" },
     { name: "Eintracht Frankfurt", path: "logos/Bundesliga/frankfurt.png" },
