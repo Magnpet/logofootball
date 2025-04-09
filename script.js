@@ -864,7 +864,7 @@ const teamLogos = [
     { name: "Montpellier", path: "logos/Ligue1/montpellier.png" },
     { name: "Nantes", path: "logos/Ligue1/nantes.png" },
     { name: "Nice", path: "logos/Ligue1/nice.png" },
-    { name: "Paris Saint-German", path: "logos/Ligue1/psg.png" },
+    { name: "Paris Saint-Germain", path: "logos/Ligue1/psg.png" },
     { name: "Reims", path: "logos/Ligue1/reims.png" },
     { name: "Rennes", path: "logos/Ligue1/rennes.png" },
     { name: "Strasbourg", path: "logos/Ligue1/strasbourg.png" },
